@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon Épargne</title>
+<meta name="description" content="Suivez votre épargne et projetez vos revenus à la retraite. Vos chiffres restent sur votre appareil.">
+<meta name="theme-color" content="#0B0F14">
+<meta name="apple-mobile-web-app-title" content="Horizon Épargne">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234ADE9B'/%3E%3Cstop offset='1' stop-color='%236EA8FE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M21 17v30M43 17v30M21 32h22' stroke='%2306120C' stroke-width='7' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0B0F14;--s1:#121821;--s2:#18202B;--bd:#232D3A;--tx:#E8EDF3;--mu:#8A97A8;--ac:#4ADE9B;--ac2:#6EA8FE;--wa:#F5B84B;--r:18px;--sh:0 10px 30px rgba(0,0,0,.25)}
+[data-theme=light]{--bg:#F4F6F9;--s1:#FFFFFF;--s2:#F0F3F7;--bd:#DFE5EC;--tx:#101822;--mu:#5E6B7B;--ac:#0E9F6E;--ac2:#2F6FDB;--wa:#B7791F;--sh:0 8px 24px rgba(16,24,34,.08)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.app{max-width:1080px;margin:0 auto;padding:16px 16px 96px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;font-size:17px}
+.logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;color:#06120C;font-weight:800}
+.btn{border:1px solid var(--bd);background:var(--s1);color:var(--tx);border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.btn.pri{background:var(--ac);border-color:var(--ac);color:#06120C}
+.btn.ghost{background:transparent}
+.nav{display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--s1);border:1px solid var(--bd);border-radius:999px;margin-bottom:16px;scrollbar-width:none;position:sticky;top:8px;z-index:5;box-shadow:var(--sh)}
+.nav button{border:0;background:transparent;color:var(--mu);font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.nav button[aria-selected=true]{background:var(--tx);color:var(--bg)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:18px;min-width:0}
+.hero{background:radial-gradient(120% 140% at 0% 0%,color-mix(in srgb,var(--ac) 22%,var(--s1)),var(--s1) 60%);padding:22px}
+.lab{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.big{font-size:clamp(32px,8vw,48px);font-weight:750;letter-spacing:-.03em;line-height:1.05;margin:6px 0 10px;font-variant-numeric:tabular-nums}
+.mid{font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.sub{color:var(--mu);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--s2);border:1px solid var(--bd);border-radius:999px;padding:6px 12px;font-size:13px}
+.chip b{font-variant-numeric:tabular-nums}
+h2{font-size:16px;margin:0 0 12px;letter-spacing:-.01em}
+h3{font-size:14px;margin:18px 0 8px}
+.row{display:grid;grid-template-columns:minmax(90px,34%) 1fr auto;gap:10px;align-items:center;font-size:13px;padding:5px 0}
+.row .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{height:8px;border-radius:999px;background:var(--s2);overflow:hidden;display:flex}
+.track i{display:block;height:100%}
+.v{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--mu)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--mu);margin-top:10px}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px}
+.donut{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center}
+@media(max-width:420px){.donut{grid-template-columns:1fr}}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{font-size:11px;fill:var(--mu)}
+.gl{stroke:var(--bd);stroke-width:1}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{color:var(--mu);font-weight:600;font-size:12px}
+.scroll{overflow-x:auto}
+.seg{display:inline-flex;background:var(--s2);border:1px solid var(--bd);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--mu);font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ac);color:#06120C}
+.sc{cursor:pointer;transition:border-color .15s}
+.sc[aria-pressed=true]{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mu);font-weight:600;min-width:0}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:9px 10px;min-width:0;width:100%}
+input[type=checkbox]{width:18px;height:18px;padding:0;accent-color:var(--ac)}
+input[type=range]{padding:0;accent-color:var(--ac);background:transparent;border:0}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.pos{border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px;background:var(--s2)}
+.pos input,.pos select{background:var(--s1)}
+.chk{flex-direction:row!important;align-items:center;gap:8px!important}
+.note{font-size:12px;color:var(--mu);margin:10px 0 0}
+.warn{border-color:color-mix(in srgb,var(--wa) 55%,var(--bd));background:color-mix(in srgb,var(--wa) 9%,var(--s1));font-size:13px}
+.bar{height:10px;border-radius:999px;background:var(--s2);overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.read{font-size:12px;color:var(--mu);min-height:18px;margin-top:6px;font-variant-numeric:tabular-nums}
+details{border-top:1px solid var(--bd);padding-top:10px;margin-top:12px}
+summary{cursor:pointer;font-weight:600;font-size:14px}
+ul{padding-left:18px;margin:8px 0}
+li{margin:5px 0}
+.steps{display:flex;gap:6px;margin:0 0 16px}
+.steps i{flex:1;height:4px;border-radius:999px;background:var(--s2)}
+.steps i.on{background:var(--ac)}
+.hint{font-size:12px;color:var(--mu);font-weight:400;line-height:1.4}
+.err{color:var(--wa);font-size:13px;min-height:18px;margin-top:10px;font-weight:600}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.ligne{border-top:1px solid var(--bd);padding:14px 0}
+.ligne b{display:block;font-size:14px}
+.wiz{max-width:640px;margin:0 auto}
+.wiz h2{font-size:22px;letter-spacing:-.02em;margin-bottom:8px}
+.wiz p{margin:0 0 14px}
+.col{display:flex;flex-direction:column;gap:14px}
+.lien{display:block;background:none;border:0;color:var(--mu);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;padding:12px 0 0}
+label.btn{display:inline-block}
+.donut svg{max-width:220px;margin:0 auto}
+.fields .chk{grid-column:1/-1}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
+.phase{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:14px}
+@media(max-width:430px){.brand{font-size:15px;gap:8px;white-space:nowrap}.top .btn{padding:7px 11px;font-size:12px}}
+@media(max-width:520px){.sc{display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:center;padding:14px 16px}.sc .lab,.sc .sub{grid-column:1}.sc .mid{grid-column:2;grid-row:1/3;margin:0!important;font-size:22px}}
+.param{padding:12px 0;border-top:1px solid var(--bd)}
+.param:first-of-type{border-top:0;padding-top:0}
+.plab{font-size:13px;margin-bottom:8px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand"><span class="logo">H</span>Horizon Épargne</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn ghost" id="b-theme" data-act="theme" type="button">Clair</button>
+      <button class="btn" data-go="reglages" type="button">Sauvegarde</button>
+    </div>
+  </div>
+  <nav class="nav" id="nav" aria-label="Rubriques">
+    <button data-go="synthese">Synthèse</button>
+    <button data-go="patrimoine">Patrimoine</button>
+    <button data-go="retraite">Retraite</button>
+    <button data-go="projections">Projections</button>
+    <button data-go="reglages">Réglages</button>
+    <button data-go="notice">Notice</button>
+  </nav>
+  <main id="vue"></main>
+</div>
+<script>
+"use strict";
+const CLE = "horizon-epargne-v1";
+const COUL = ["#4ADE9B", "#6EA8FE", "#F5B84B", "#C58BF2", "#F2777A", "#5FD3D8", "#9AA7B8"];
+const ENVS = ["Compte courant", "Livret réglementé", "PEA", "Assurance-vie", "Compte-titres", "PER individuel", "Épargne salariale (PEE, PERCO)", "PER d'entreprise obligatoire", "Crypto-actifs", "Autre"];
+const CLASSES = ["Liquidités", "Actions", "Obligations", "Immobilier", "Diversifié", "Autre"];
+const SCN = [["prudent", "Prudent"], ["central", "Central"], ["dynamique", "Dynamique"]];
+const EXEMPLE = () => ({
+  exemple: true,
+  profil: {naissance: 1990, trimestres: 56, points: 2900, salaire: 52000, parts: 1, ageDepart: 0},
+  positions: [
+    {nom: "Compte courant", env: "Compte courant", classe: "Liquidités", valeur: 2300, verse: 2300, retraite: false, versement: 0, indexe: false},
+    {nom: "Livret A", env: "Livret réglementé", classe: "Liquidités", valeur: 14000, verse: 14000, retraite: false, versement: 0, indexe: false},
+    {nom: "PEA, fonds indiciel monde", env: "PEA", classe: "Actions", valeur: 18500, verse: 15000, retraite: true, versement: 2400, indexe: false},
+    {nom: "Assurance-vie", env: "Assurance-vie", classe: "Diversifié", valeur: 22000, verse: 20000, retraite: true, versement: 1800, indexe: false},
+    {nom: "PER individuel", env: "PER individuel", classe: "Actions", valeur: 9500, verse: 9000, retraite: true, versement: 1500, indexe: false},
+    {nom: "Épargne salariale", env: "Épargne salariale (PEE, PERCO)", classe: "Actions", valeur: 12000, verse: 10000, retraite: true, versement: 2000, indexe: false}
+  ],
+  sc: {prudent: {rdt: 3, sal: 0.5, pt: -0.4, vers: 0}, central: {rdt: 4.5, sal: 1.5, pt: -0.2, vers: 100}, dynamique: {rdt: 5.5, sal: 2.5, pt: 0, vers: 100}},
+  plateau: 50,
+  retraite: {duree: 25, rdt: 1},
+  objectif: {nom: "", montant: 0},
+  regles: {annee: 2026, ageLegal: 64, ageAuto: 67, trimRequis: 172, pass: 48060, tauxBase: 50, anneesSam: 25, decote: 1.25, t1: 6.2, t2: 17, prixAchat: 20.1877, valeurPoint: 1.4587, haussePass: 0.5,
+    seuil1: 11600, seuil2: 29579, seuil3: 84577, seuil4: 181917, taux1: 11, taux2: 30, taux3: 41, taux4: 45, abatPlafond: 4439, csgDed: 5.9, psBase: 9.1, psCompl: 10.1, psCapital: 18.6, pfu: 31.4, pfuAV: 24.7}
+});
+let S = EXEMPLE();
+let vue = "synthese", scSel = "central", etape = -1, A = null, premiereVisite = true;
+const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(S)); } catch (e) {} };
+
+const eur = (v) => Math.round(v).toLocaleString("fr-FR") + " €";
+const court = (v) => (Math.abs(v) >= 1e6 ? (v / 1e6).toLocaleString("fr-FR", {maximumFractionDigits: 2}) + " M€" : Math.round(v / 1000).toLocaleString("fr-FR") + " k€");
+const pct = (v) => Math.round(v) + " %";
+const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const num = (v) => { const n = parseFloat(String(v).replace(/\s/g, "").replace(",", ".")); return isFinite(n) ? n : 0; };
+const somme = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const fr = (v) => (typeof v === "number" ? String(v).replace(".", ",") : String(v == null ? "" : v));
+const lire = (obj, chemin) => chemin.split(".").reduce((x, p) => x[p], obj);
+const objet = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v : {});
+const borne = (v, min, max, def) => {
+  if (v === "" || v == null || typeof v === "object" || typeof v === "boolean") return def;
+  const n = parseFloat(String(v).replace(/\s/g, "").replace(",", "."));
+  return isFinite(n) && n >= min && n <= max ? n : def;
+};
+/* Toute donnée venue du stockage ou d'un fichier passe par ici : nombres bornés, textes tronqués, listes fermées. */
+function normaliser(o) {
+  const b = EXEMPLE();
+  if (!o || typeof o !== "object") return b;
+  const R = Object.assign({}, b.regles), r = objet(o.regles);
+  for (const k of Object.keys(R)) R[k] = borne(r[k], -1e9, 1e9, R[k]);
+  for (const k of ["prixAchat", "trimRequis", "pass", "valeurPoint", "anneesSam", "tauxBase"]) if (!(R[k] > 0)) R[k] = b.regles[k];
+  R.annee = Math.round(borne(R.annee, 2000, 2100, b.regles.annee));
+  R.anneesSam = Math.max(1, Math.round(R.anneesSam));
+  if (!(R.ageLegal >= 50 && R.ageAuto >= R.ageLegal && R.ageAuto <= 80)) { R.ageLegal = b.regles.ageLegal; R.ageAuto = b.regles.ageAuto; }
+  const p = objet(o.profil);
+  const profil = {naissance: Math.round(borne(p.naissance, 1930, R.annee, b.profil.naissance)), trimestres: borne(p.trimestres, 0, 300, 0), points: borne(p.points, 0, 1e6, 0),
+    salaire: borne(p.salaire, 0, 1e8, 0), parts: borne(p.parts, 1, 20, 1), ageDepart: Math.round(borne(p.ageDepart, 0, 80, 0))};
+  const positions = (Array.isArray(o.positions) ? o.positions : []).slice(0, 100).map((x) => {
+    x = objet(x);
+    return {nom: typeof x.nom === "string" && x.nom.trim() ? x.nom.trim().slice(0, 80) : "Placement", env: ENVS.includes(x.env) ? x.env : "Autre", classe: CLASSES.includes(x.classe) ? x.classe : "Autre",
+      valeur: borne(x.valeur, 0, 1e10, 0), verse: borne(x.verse, 0, 1e10, 0), retraite: x.retraite === true, versement: borne(x.versement, 0, 1e8, 0), indexe: x.indexe === true};
+  });
+  const sc = {}, scs = objet(o.sc);
+  for (const [k] of SCN) { const x = objet(scs[k]), d = b.sc[k]; sc[k] = {rdt: borne(x.rdt, -10, 20, d.rdt), sal: borne(x.sal, -10, 20, d.sal), pt: borne(x.pt, -10, 10, d.pt), vers: borne(x.vers, 0, 300, d.vers)}; }
+  const ob = objet(o.objectif), re = objet(o.retraite);
+  return {exemple: o.exemple === true, profil, positions, sc, plateau: Math.round(borne(o.plateau, 18, 80, b.plateau)),
+    retraite: {duree: Math.round(borne(re.duree, 1, 60, b.retraite.duree)), rdt: borne(re.rdt, -5, 15, b.retraite.rdt)},
+    objectif: {nom: typeof ob.nom === "string" ? ob.nom.trim().slice(0, 60) : "", montant: borne(ob.montant, 0, 1e10, 0)}, regles: R};
+}
+try { const t = localStorage.getItem(CLE); if (t) { S = normaliser(JSON.parse(t)); premiereVisite = false; } } catch (e) {}
+
+/* ---------- Modèle ---------- */
+function projeter(S, cle, ageDepart) {
+  const R = S.regles, P = S.profil, sc = S.sc[cle];
+  const age0 = R.annee - P.naissance, annees = Math.max(0, ageDepart - age0);
+  const rdt = sc.rdt / 100, hs = sc.sal / 100, hp = R.haussePass / 100, part = sc.vers / 100;
+  const plateau = Math.max(0, S.plateau - age0);
+  const pos = S.positions.filter((p) => p.retraite).map((p) => ({p, v: num(p.valeur), verse: num(p.verse)}));
+  let points = num(P.points), salaire = num(P.salaire);
+  const plafonnes = [], traj = [{age: age0, total: somme(pos, (x) => x.v)}];
+  for (let t = 1; t <= annees; t++) {
+    const plafond = R.pass * Math.pow(1 + hp, t), indice = Math.pow(1 + hs, Math.min(t, plateau));
+    salaire = num(P.salaire) * indice;
+    plafonnes.push(Math.min(plafond, salaire));
+    const t1 = Math.min(salaire, plafond), t2 = Math.max(0, Math.min(salaire, 8 * plafond) - plafond);
+    points += (R.t1 / 100 * t1 + R.t2 / 100 * t2) / (R.prixAchat * Math.pow(1 + hp, t));
+    for (const x of pos) {
+      const vers = part * num(x.p.versement) * (x.p.indexe ? indice : 1);
+      x.v = x.v * (1 + rdt) + vers;
+      x.verse += vers;
+    }
+    traj.push({age: age0 + t, total: somme(pos, (x) => x.v)});
+  }
+  const trimestres = Math.min(R.trimRequis, num(P.trimestres) + 4 * annees);
+  const manquants = Math.max(0, Math.min(R.trimRequis - trimestres, 4 * (R.ageAuto - ageDepart), 20));
+  const meilleures = plafonnes.slice(-R.anneesSam);
+  const sam = meilleures.length ? somme(meilleures, (v) => v) / meilleures.length : Math.min(R.pass, num(P.salaire));
+  const base = sam * R.tauxBase / 100 * (1 - manquants * R.decote / 100) * trimestres / R.trimRequis;
+  const minoration = manquants <= 12 ? 1 - 0.01 * manquants : 0.88 - 0.0125 * (manquants - 12);
+  const agirc = points * R.valeurPoint * Math.pow(1 + sc.pt / 100, annees) * minoration;
+  const r = S.retraite.rdt / 100, d = Math.max(1, S.retraite.duree);
+  const annuite = (c) => c * (r === 0 ? 1 / d : r / (1 - Math.pow(1 + r, -d)));
+  const psB = R.psBase / 100, psC = R.psCompl / 100;
+  const bareme = (rev) => {
+    const q = Math.max(0, rev) / P.parts, seuils = [R.seuil1, R.seuil2, R.seuil3, R.seuil4, Infinity], taux = [0, R.taux1, R.taux2, R.taux3, R.taux4];
+    let imp = 0, bas = 0;
+    seuils.forEach((s, i) => { if (q > bas) imp += (Math.min(q, s) - bas) * taux[i] / 100; bas = s; });
+    return imp * P.parts;
+  };
+  const imposable = (b, c) => { const net = (b + c) * (1 - R.csgDed / 100) - c * (psC - psB); return net - Math.min(net * 0.1, R.abatPlafond); };
+  let rente = 0, perImposable = 0, taxeCapital = 0, capital = 0;
+  const sources = [];
+  for (const x of pos) {
+    const a = annuite(x.v), gains = x.v > 0 ? Math.max(0, 1 - x.verse / x.v) : 0, e = x.p.env;
+    capital += x.v;
+    if (e === "PER d'entreprise obligatoire") rente += a;
+    else if (e === "PER individuel") { perImposable += a * (1 - gains); taxeCapital += a * gains * R.pfu / 100; }
+    else if (e === "PEA" || e === "Épargne salariale (PEE, PERCO)") taxeCapital += a * gains * R.psCapital / 100;
+    else if (e === "Assurance-vie") taxeCapital += a * gains * R.pfuAV / 100;
+    else if (e === "Compte courant" || e === "Livret réglementé") taxeCapital += 0;
+    else taxeCapital += a * gains * R.pfu / 100;
+    sources.push({nom: x.p.nom, env: e, capital: x.v, mensuel: a / 12});
+  }
+  const revenuCapital = somme(sources, (s) => s.mensuel) * 12;
+  const netOblig = base * (1 - psB) + agirc * (1 - psC) - bareme(imposable(base, agirc));
+  const brut = base + agirc + revenuCapital;
+  const net = brut - base * psB - (agirc + rente) * psC - bareme(imposable(base, agirc + rente) + perImposable) - taxeCapital;
+  return {cle, age: ageDepart, annees, manquants, trimestres, base: base / 12, agirc: agirc / 12, oblig: (base + agirc) / 12, capital, revenuCapital: revenuCapital / 12,
+    brut: brut / 12, net: net / 12, netOblig: netOblig / 12, salaireFin: salaire, remplacement: salaire > 0 ? 100 * (base + agirc) / salaire : 0, sources, traj, duree: d};
+}
+function ageTauxPlein(S) {
+  const R = S.regles, age0 = R.annee - S.profil.naissance;
+  for (let a = Math.max(R.ageLegal, age0); a <= R.ageAuto; a++) if (num(S.profil.trimestres) + 4 * (a - age0) >= R.trimRequis) return a;
+  return Math.max(R.ageAuto, age0);
+}
+const ageRetenu = () => { const a = num(S.profil.ageDepart); return a >= S.regles.ageLegal ? Math.min(a, 75) : ageTauxPlein(S); };
+const total = () => somme(S.positions, (p) => num(p.valeur));
+
+/* ---------- Graphiques ---------- */
+function donut(parts) {
+  const tot = somme(parts, (p) => p.v) || 1, R = 60, C = 2 * Math.PI * R;
+  let acc = 0;
+  const arcs = parts.map((p, i) => { const l = C * p.v / tot, s = `<circle cx="80" cy="80" r="${R}" fill="none" stroke="${COUL[i % COUL.length]}" stroke-width="20" stroke-dasharray="${Math.max(0, l - 2)} ${C - Math.max(0, l - 2)}" stroke-dashoffset="${-acc}" transform="rotate(-90 80 80)"/>`; acc += l; return s; }).join("");
+  return `<svg viewBox="0 0 160 160" role="img" aria-label="Répartition">${arcs}<text x="80" y="78" text-anchor="middle" style="font-size:17px;font-weight:700;fill:var(--tx)">${court(tot)}</text><text x="80" y="96" text-anchor="middle" class="ax">total</text></svg>`;
+}
+function barres(lignes) {
+  const max = Math.max(1, ...lignes.map((l) => l.v));
+  return lignes.map((l, i) => `<div class="row"><span class="n">${esc(l.n)}</span><span class="track"><i style="width:${100 * l.v / max}%;background:${l.c || COUL[i % COUL.length]}"></i></span><span class="v">${eur(l.v)}${l.p != null ? " · " + pct(l.p) : ""}</span></div>`).join("");
+}
+const largeur = () => Math.max(280, Math.min(1040, (document.getElementById("vue").clientWidth || 678) - 38));
+function courbes(series, id) {
+  const W = largeur(), H = W < 480 ? 230 : 280, m = {l: 46, r: 58, t: 12, b: 26};
+  const xs = series[0].pts.map((p) => p.age), x0 = xs[0], x1 = xs[xs.length - 1] || x0 + 1;
+  const max = Math.max(1, ...series.flatMap((s) => s.pts.map((p) => p.total)));
+  const pas = Math.pow(10, Math.floor(Math.log10(max))), haut = Math.ceil(max / pas) * pas;
+  const X = (a) => m.l + (W - m.l - m.r) * (x1 === x0 ? 0 : (a - x0) / (x1 - x0)), Y = (v) => H - m.b - (H - m.t - m.b) * v / haut;
+  let g = "";
+  for (let i = 0; i <= 4; i++) { const v = haut * i / 4; g += `<line class="gl" x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end">${court(v)}</text>`; }
+  const n = Math.min(W < 480 ? 3 : 6, xs.length - 1) || 1;
+  for (let i = 0; i <= n; i++) { const a = Math.round(x0 + (x1 - x0) * i / n); g += `<text class="ax" x="${X(a)}" y="${H - 6}" text-anchor="middle">${a} ans</text>`; }
+  series.forEach((s, i) => {
+    const d = s.pts.map((p, j) => (j ? "L" : "M") + X(p.age).toFixed(1) + " " + Y(p.total).toFixed(1)).join(" "), fin = s.pts[s.pts.length - 1];
+    if (i === 1) g += `<path d="${d} L${X(x1)} ${Y(0)} L${X(x0)} ${Y(0)} Z" fill="${s.c}" opacity=".10"/>`;
+    g += `<path d="${d}" fill="none" stroke="${s.c}" stroke-width="2.6" stroke-linecap="round"/><text x="${X(fin.age) + 6}" y="${Y(fin.total) + 4}" style="font-size:11px;font-weight:700;fill:${s.c}">${court(fin.total)}</text>`;
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" id="${id}" data-x0="${x0}" data-x1="${x1}" data-ml="${m.l}" data-mr="${m.r}" data-w="${W}" role="img" aria-label="Capital projeté par scénario">${g}<line id="${id}-g" class="gl" y1="${m.t}" y2="${H - m.b}" x1="-10" x2="-10" stroke-dasharray="3 3"/></svg>`;
+}
+function colonnes(lignes, id) {
+  const W = largeur(), H = W < 480 ? 210 : 240, m = {l: 50, r: 8, t: 10, b: 26};
+  const max = Math.max(1, ...lignes.map((l) => l.a + l.b)), pas = Math.pow(10, Math.floor(Math.log10(max))), haut = Math.ceil(max / pas) * pas;
+  const bw = (W - m.l - m.r) / lignes.length, Y = (v) => H - m.b - (H - m.t - m.b) * v / haut;
+  let g = "";
+  for (let i = 0; i <= 4; i++) { const v = haut * i / 4; g += `<line class="gl" x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end">${eur(v)}</text>`; }
+  lignes.forEach((l, i) => {
+    const x = m.l + i * bw + bw * 0.12, w = bw * 0.76;
+    g += `<rect x="${x}" y="${Y(l.a)}" width="${w}" height="${Y(0) - Y(l.a)}" rx="2" fill="${COUL[1]}"/>`;
+    if (l.b > 0) g += `<rect x="${x}" y="${Y(l.a + l.b)}" width="${w}" height="${Y(l.a) - Y(l.a + l.b)}" rx="2" fill="${COUL[0]}"/>`;
+    if (l.age % (W < 480 ? 10 : 5) === (W < 480 ? 5 : 0)) g += `<text class="ax" x="${x + w / 2}" y="${H - 6}" text-anchor="middle">${l.age} ans</text>`;
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" id="${id}" role="img" aria-label="Revenu mensuel par âge">${g}</svg>`;
+}
+
+/* ---------- Vues ---------- */
+const bandeau = () => (S.exemple
+  ? `<div class="card warn" style="margin-bottom:14px">Vous voyez des données d'exemple. Quelques minutes suffisent pour les remplacer par les vôtres : tout reste sur cet appareil, rien n'est envoyé.<div class="acts" style="margin-top:10px"><button class="btn pri" data-act="commencer" type="button">Commencer avec mes chiffres</button></div></div>`
+  : (S.positions.length ? "" : `<div class="card" style="margin-bottom:14px">Aucun compte n'est encore saisi.<div class="acts" style="margin-top:10px"><button class="btn pri" data-act="commencer" type="button">Lancer l'assistant</button><button class="btn" data-go="patrimoine" type="button">Saisir ligne par ligne</button></div></div>`));
+function vSynthese() {
+  const tot = total(), ret = somme(S.positions.filter((p) => p.retraite), (p) => num(p.valeur)), age = ageRetenu(), c = projeter(S, "central", age);
+  const par = (k) => { const o = {}; for (const p of S.positions) o[p[k]] = (o[p[k]] || 0) + num(p.valeur); return Object.entries(o).map(([n, v]) => ({n, v, p: tot ? 100 * v / tot : 0})).filter((x) => x.v > 0).sort((a, b) => b.v - a.v); };
+  const cl = par("classe"), en = par("env"), ob = S.objectif, dispo = tot - ret;
+  return bandeau() + `<div class="grid">
+  <section class="card hero"><div class="lab">Patrimoine financier</div><div class="big">${eur(tot)}</div>
+    <div class="chips"><span class="chip">Disponible <b>${eur(dispo)}</b></span><span class="chip">Conservé pour la retraite <b>${eur(ret)}</b></span><span class="chip">${S.positions.length} lignes</span></div></section>
+  <div class="grid g2">
+    <section class="card"><h2>Répartition par classe d'actifs</h2><div class="donut">${donut(cl)}<div>${barres(cl)}</div></div></section>
+    <section class="card"><h2>Par enveloppe</h2>${barres(en)}</section>
+  </div>
+  <div class="grid g2">
+    <section class="card"><div class="lab">À la retraite, scénario central</div><div class="mid" style="margin:6px 0">${eur(c.net)} <span class="sub">nets d'impôt par mois</span></div>
+      <div class="sub">Départ à ${c.age} ans · ${eur(c.brut)} bruts · capital de ${court(c.capital)} consommé sur ${c.duree} ans, puis ${eur(c.netOblig)} nets à vie.</div>
+      <div style="margin-top:12px"><button class="btn pri" data-go="retraite" type="button">Voir les scénarios</button></div></section>
+    ${num(ob.montant) > 0 ? `<section class="card"><div class="lab">Objectif : ${esc(ob.nom || "projet")}</div><div class="mid" style="margin:6px 0">${eur(dispo)} <span class="sub">sur ${eur(num(ob.montant))}</span></div><div class="bar"><i style="width:${Math.min(100, 100 * dispo / num(ob.montant))}%"></i></div><div class="sub">Épargne disponible rapportée à l'objectif ; il reste ${eur(Math.max(0, num(ob.montant) - dispo))} à réunir.</div></section>` : `<section class="card"><div class="lab">Objectif de projet</div><p class="sub">Aucun objectif défini. Ajoutez un projet (apport immobilier, année sabbatique…) dans Réglages pour suivre son avancement sur l'épargne disponible.</p></section>`}
+  </div></div>`;
+}
+function vPatrimoine() {
+  const opt = (l, v) => l.map((x) => `<option${x === v ? " selected" : ""}>${esc(x)}</option>`).join("");
+  return bandeau() + `<section class="card"><h2>Vos comptes et placements</h2><p class="sub" style="margin-top:-6px">Une ligne par compte ou par support. Cochez « conservé jusqu'à la retraite » pour les placements que vous ne comptez pas utiliser avant : eux seuls entrent dans la projection.</p>
+  ${S.positions.map((p, i) => `<div class="pos"><div class="fields">
+    <label class="f">Nom<input data-k="positions.${i}.nom" value="${esc(p.nom)}"></label>
+    <label class="f">Enveloppe<select data-k="positions.${i}.env">${opt(ENVS, p.env)}</select></label>
+    <label class="f">Classe d'actifs<select data-k="positions.${i}.classe">${opt(CLASSES, p.classe)}</select></label>
+    <label class="f">Valeur actuelle (€)<input inputmode="decimal" data-n data-k="positions.${i}.valeur" value="${fr(num(p.valeur))}"></label>
+    <label class="f">Total versé (€)<input inputmode="decimal" data-n data-k="positions.${i}.verse" value="${fr(num(p.verse))}"></label>
+    <label class="f">Versement prévu par an (€)<input inputmode="decimal" data-n data-k="positions.${i}.versement" value="${fr(num(p.versement))}"></label>
+    <label class="f chk"><input type="checkbox" data-k="positions.${i}.retraite"${p.retraite ? " checked" : ""}>Conservé jusqu'à la retraite</label>
+    <label class="f chk"><input type="checkbox" data-k="positions.${i}.indexe"${p.indexe ? " checked" : ""}>Versement indexé sur le salaire</label>
+    </div><div style="margin-top:10px"><button class="btn ghost" data-suppr="${i}" type="button">Supprimer</button></div></div>`).join("")}
+  <button class="btn pri" data-act="ajout" type="button">Ajouter une ligne</button>
+  <p class="note">« Total versé » sert à estimer la part de gains imposable à la sortie. Sans cette information, saisissez la valeur actuelle : les gains passés seront comptés comme nuls.</p></section>`;
+}
+function vRetraite() {
+  const R = S.regles, age = ageRetenu(), age0 = R.annee - S.profil.naissance;
+  return bandeau() + `<section class="card"><h2>Vos revenus à la retraite</h2>
+    <label class="f" style="max-width:420px">Âge de départ : <span id="r-age-l"></span><input type="range" id="r-age" min="${Math.max(R.ageLegal, age0)}" max="${Math.max(R.ageAuto, age0) + 3}" step="1" value="${age}"></label>
+    <div class="grid g3" id="r-cartes" style="margin-top:14px"></div></section>
+  <section class="card" style="margin-top:14px" id="r-detail"></section>`;
+}
+function majRetraite() {
+  const age = num(document.getElementById("r-age").value);
+  S.profil.ageDepart = age; sauver();
+  const res = SCN.map(([k]) => projeter(S, k, age)), sel = res.find((r) => r.cle === scSel);
+  document.getElementById("r-age-l").textContent = age + " ans" + (sel.manquants ? " (" + sel.manquants + " trimestres manquants, décote appliquée)" : " (taux plein)");
+  document.getElementById("r-cartes").innerHTML = res.map((r, i) => `<div class="card sc" role="button" tabindex="0" data-sc="${r.cle}" aria-pressed="${r.cle === scSel}"><div class="lab">${SCN[i][1]}</div><div class="mid" style="margin:6px 0">${eur(r.net)}</div><div class="sub">nets d'impôt par mois<br>${eur(r.brut)} bruts · capital ${court(r.capital)}</div></div>`).join("");
+  const lignes = [{n: "Régime de base", v: sel.base, c: COUL[1]}, {n: "Agirc-Arrco", v: sel.agirc, c: COUL[5]}].concat(sel.sources.map((s, i) => ({n: s.nom, v: s.mensuel, c: COUL[(i + 2) % COUL.length]}))).filter((l) => l.v >= 0.5);
+  document.getElementById("r-detail").innerHTML = `<h2>Détail du scénario ${SCN.find((s) => s[0] === scSel)[1].toLowerCase()}, par mois, brut</h2>${barres(lignes)}
+    <div class="phases"><div class="phase"><div class="lab">De ${sel.age} à ${sel.age + sel.duree - 1} ans</div><div class="mid" style="margin:4px 0">${eur(sel.net)} <span class="sub">nets par mois</span></div><div class="sub">${eur(sel.brut)} bruts · pensions et capital en cours de consommation</div></div>
+    <div class="phase"><div class="lab">À partir de ${sel.age + sel.duree} ans</div><div class="mid" style="margin:4px 0">${eur(sel.netOblig)} <span class="sub">nets par mois</span></div><div class="sub">${eur(sel.oblig)} bruts · capital épuisé, pensions seules, versées à vie</div></div></div>
+    <div class="chips" style="margin-top:12px"><span class="chip">Prélèvements et impôt <b>${eur(sel.brut - sel.net)}</b></span><span class="chip">Pensions / dernier salaire <b>${pct(sel.remplacement)}</b></span><span class="chip">Dernier salaire brut <b>${eur(sel.salaireFin / 12)}</b> par mois</span></div>
+    <p class="note">Euros constants de ${S.regles.annee} : ces montants ont le pouvoir d'achat d'aujourd'hui. Le capital est consommé en ${sel.duree} ans ; ce n'est pas une rente viagère.</p>
+    <details><summary>Comment lire ces chiffres</summary><ul><li><b>Brut</b> : avant prélèvements sociaux et impôt. <b>Net d'impôt</b> : ce qui vous reste réellement chaque mois.</li><li>Les montants sont en euros d'aujourd'hui : 2 000 € affichés achèteront ce que 2 000 € achètent aujourd'hui.</li><li>Prudent, central et dynamique sont trois jeux d'hypothèses de rendement et de carrière. Aucun n'est une prévision : ils encadrent ce qui peut arriver.</li><li>Le capital est consommé peu à peu pendant ${sel.duree} ans. Ensuite, il reste vos pensions, versées à vie.</li></ul></details>`;
+}
+function vProjections() {
+  const age = ageRetenu(), res = SCN.map(([k]) => projeter(S, k, age)), c = res[1];
+  const series = res.map((r, i) => ({nom: SCN[i][1], c: [COUL[6], COUL[0], COUL[1]][i], pts: r.traj}));
+  const lig = []; for (let a = c.age; a <= 95; a++) lig.push({age: a, a: c.oblig, b: a < c.age + c.duree ? c.revenuCapital : 0});
+  return bandeau() + `<div class="grid"><section class="card"><h2>Capital conservé pour la retraite, par scénario</h2>${courbes(series, "g-traj")}
+    <div class="leg">${series.map((s) => `<span><i style="background:${s.c}"></i>${s.nom}</span>`).join("")}</div><div class="read" id="g-traj-r">Touchez le graphique pour lire les valeurs à un âge donné.</div>
+    <p class="note">Valeur brute avant impôt de sortie, en euros constants. Le premier point est votre capital d'aujourd'hui.</p></section>
+  <section class="card"><h2>Revenu mensuel brut par âge, scénario central</h2>${colonnes(lig, "g-rev")}
+    <div class="leg"><span><i style="background:${COUL[1]}"></i>Pensions obligatoires, à vie</span><span><i style="background:${COUL[0]}"></i>Revenu tiré du capital, pendant ${c.duree} ans</span></div></section></div>`;
+}
+function vReglages() {
+  const f = (lab, k, extra) => `<label class="f">${lab}<input inputmode="decimal" data-n data-k="${k}" value="${esc(fr(lire(S, k)))}"${extra || ""}></label>`;
+  const R = [["annee", "Année des règles"], ["ageLegal", "Âge légal de départ"], ["ageAuto", "Âge du taux plein automatique"], ["trimRequis", "Trimestres requis"], ["pass", "Plafond de la Sécurité sociale (€)"], ["t1", "Agirc-Arrco : taux tranche 1 (%)"], ["t2", "Agirc-Arrco : taux tranche 2 (%)"], ["prixAchat", "Prix d'achat du point (€)"], ["valeurPoint", "Valeur du point (€)"], ["haussePass", "Hausse réelle du plafond (% par an)"],
+    ["seuil1", "Impôt : fin tranche à 0 % (€)"], ["seuil2", "Impôt : fin tranche à 11 % (€)"], ["seuil3", "Impôt : fin tranche à 30 % (€)"], ["seuil4", "Impôt : fin tranche à 41 % (€)"], ["abatPlafond", "Plafond de l'abattement de 10 % (€)"], ["csgDed", "CSG déductible (%)"], ["psBase", "Prélèvements sur pension de base (%)"], ["psCompl", "Prélèvements sur complémentaires (%)"], ["psCapital", "Prélèvements sociaux sur gains (%)"], ["pfu", "Prélèvement forfaitaire sur gains (%)"], ["pfuAV", "Assurance-vie de plus de 8 ans (%)"]];
+  return `<div class="grid">
+  <section class="card"><h2>Votre situation</h2><div class="fields">${f("Année de naissance", "profil.naissance")}${f("Rémunération brute annuelle (€)", "profil.salaire")}${f("Trimestres validés à ce jour", "profil.trimestres")}${f("Points Agirc-Arrco acquis", "profil.points")}${f("Parts fiscales", "profil.parts")}</div>
+    <p class="note">Trimestres et points figurent sur votre relevé de carrière (info-retraite.fr). Le modèle de pension est celui d'un salarié du secteur privé. Parts fiscales : laissez 1 dans la plupart des cas, car le calcul ne porte que sur vos propres revenus et, à la retraite, les enfants ne sont en général plus à charge.</p></section>
+  <section class="card"><h2>Scénarios</h2>
+    ${[["rdt", "Rendement réel de l'épargne, net de frais (% par an)"], ["sal", "Hausse réelle de la rémunération (% par an)"], ["pt", "Évolution réelle du point Agirc-Arrco (% par an)"], ["vers", "Part des versements prévus réellement faite (%)"]].map(([k, l]) => `<div class="param"><div class="plab">${l}</div><div class="tri">${SCN.map(([c, n]) => `<label class="f">${n}<input ${k === "vers" ? 'inputmode="decimal" ' : ""}data-n data-k="sc.${c}.${k}" value="${fr(S.sc[c][k])}"></label>`).join("")}</div></div>`).join("")}
+    <div class="fields" style="margin-top:12px">${f("Âge où la rémunération cesse de progresser", "plateau")}${f("Durée de consommation du capital (ans)", "retraite.duree")}${f("Rendement réel pendant la retraite (%)", "retraite.rdt")}</div>
+    <p class="note">Les rendements sont réels : nets d'inflation. 7 à 8 % par an en nominal sur les actions correspondent à environ 5 à 6 % réels avant frais.</p></section>
+  <section class="card"><h2>Objectif de projet</h2><div class="fields"><label class="f">Nom du projet<input data-k="objectif.nom" value="${esc(S.objectif.nom)}"></label>${f("Montant visé (€)", "objectif.montant")}</div></section>
+  <section class="card"><h2>Sauvegarde</h2><p class="sub" style="margin-top:-6px">Vos données restent dans ce navigateur, sur cet appareil. Téléchargez une sauvegarde pour ne pas les perdre et pour les reprendre sur un autre appareil.</p>
+    <div class="acts" style="margin-top:0"><button class="btn pri" data-act="dl" type="button">Télécharger ma sauvegarde</button><label class="btn" for="f-import">Importer une sauvegarde</label><input type="file" id="f-import" accept=".json,application/json" class="hide"></div>
+    <div class="read" id="t-msg"></div>
+    <details><summary>Autres options</summary><p class="sub" style="margin-top:10px">Si le téléchargement ne fonctionne pas, copiez ce texte et conservez-le ; collez-le ici pour retrouver vos données.</p>
+    <textarea id="t-json" rows="4" spellcheck="false"></textarea>
+    <div class="acts" style="margin-top:10px"><button class="btn" data-act="copie" type="button">Copier le texte</button><button class="btn" data-act="restaure" type="button">Restaurer depuis le texte</button><button class="btn" data-go="debut" type="button">Relancer l'assistant</button><button class="btn" data-act="exemple" type="button">Recharger l'exemple</button><button class="btn ghost" data-act="vide" type="button">Tout effacer</button></div></details></section>
+  <section class="card"><h2>Règles sociales et fiscales</h2><p class="sub" style="margin-top:-6px">Valeurs de ${S.regles.annee}, à mettre à jour chaque année. Âge légal et trimestres requis dépendent de votre année de naissance : vérifiez-les sur info-retraite.fr si vous êtes né avant 1969.</p>
+    <details><summary>Afficher et modifier</summary><div class="fields" style="margin-top:12px">${R.map(([k, l]) => f(l, "regles." + k)).join("")}</div></details></section></div>`;
+}
+function vNotice() {
+  return `<section class="card"><h2>Notice : ce que calcule l'outil</h2>
+  <h3>Ce qui est projeté</h3><ul><li>Seuls les placements cochés « conservé jusqu'à la retraite » entrent dans le capital projeté. Le reste est votre épargne disponible.</li><li>Tous les montants de projection sont en euros constants : ils ont le pouvoir d'achat d'aujourd'hui.</li></ul>
+  <h3>Les trois scénarios</h3><ul><li>Chaque scénario a son rendement réel, sa hausse de rémunération, son évolution du point Agirc-Arrco et sa part de versements réellement faite. Par défaut, le prudent ne compte aucun nouveau versement.</li><li>La rémunération progresse jusqu'à l'âge de plateau, puis suit l'inflation.</li></ul>
+  <h3>Les calculs</h3><ul><li>Capital : chaque année, capital × (1 + rendement réel) + versement de l'année.</li><li>Pension de base : 50 % du salaire moyen des vingt-cinq meilleures années plafonnées, au prorata des trimestres validés, avec décote par trimestre manquant.</li><li>Agirc-Arrco : points de l'année = (taux tranche 1 × salaire sous le plafond + taux tranche 2 × salaire au-dessus) / prix d'achat ; pension = points × valeur du point.</li><li>Revenu tiré du capital : mensualité constante qui épuise le capital sur la durée choisie. Ce n'est pas une rente viagère : au-delà, il reste les pensions.</li><li>Net d'impôt : prélèvements sociaux sur les pensions, barème de l'impôt selon vos parts après abattement de 10 %. PER individuel : versements au barème, gains au prélèvement forfaitaire. PEA et épargne salariale : prélèvements sociaux sur les gains. Assurance-vie : taux des contrats de plus de huit ans, sans l'abattement annuel. PER d'entreprise obligatoire : traité comme une rente.</li></ul>
+  <h3>Lexique</h3><ul><li><b>Brut, net d'impôt</b> : avant, puis après prélèvements sociaux et impôt sur le revenu.</li><li><b>Euros constants</b> : montants exprimés avec le pouvoir d'achat d'aujourd'hui.</li><li><b>Rendement réel</b> : rendement une fois l'inflation retirée.</li><li><b>Trimestre</b> : unité de durée de cotisation. Il en faut un nombre fixé par la loi pour une pension de base complète.</li><li><b>Taux plein</b> : pension de base sans décote, atteinte quand tous les trimestres requis sont validés ou, à défaut, à l'âge du taux plein automatique.</li><li><b>Point Agirc-Arrco</b> : unité de la retraite complémentaire des salariés du privé. La pension est égale au nombre de points multiplié par la valeur du point.</li><li><b>Enveloppe</b> : le type de compte qui contient un placement (PEA, assurance-vie, PER…). Elle fixe la fiscalité à la sortie.</li></ul>
+  <h3>Limites</h3><ul><li>Modèle de salarié du secteur privé, carrière continue. Fonctionnaires et indépendants : les pensions affichées ne s'appliquent pas.</li><li>Non modélisés : chômage, temps partiel, enfants, pension de réversion, plafonnement du quotient familial, réformes futures.</li><li>Les règles sociales et fiscales changent chaque année : vérifiez-les dans Réglages.</li><li>Outil de simulation : il ne constitue ni un conseil en investissement ni un conseil fiscal. Pour vos pensions, seuls votre relevé de carrière et le simulateur officiel M@rel font foi.</li></ul></section>`;
+}
+/* ---------- Assistant de démarrage ---------- */
+const LIGNES = [
+  ["Compte courant", "Compte courant", "Liquidités", false, "L'argent de tous les jours."],
+  ["Livrets", "Livret réglementé", "Liquidités", false, "Livret A, LDDS, LEP et autres livrets : votre épargne de précaution."],
+  ["PEA", "PEA", "Actions", true, "Plan d'épargne en actions."],
+  ["Assurance-vie", "Assurance-vie", "Diversifié", true, "Tous vos contrats réunis."],
+  ["PER", "PER individuel", "Actions", true, "Plan d'épargne retraite ouvert à votre nom."],
+  ["Épargne salariale", "Épargne salariale (PEE, PERCO)", "Actions", true, "Intéressement, participation et abondement placés dans l'entreprise."],
+  ["Autres placements", "Autre", "Autre", false, "Compte-titres, crypto-actifs et tout le reste."]
+];
+function nouveauBrouillon() {
+  const garde = !S.exemple && (S.positions.length > 0 || S.profil.salaire > 0), P = S.profil;
+  return {naissance: garde ? String(P.naissance) : "", salaire: garde ? String(P.salaire) : "", net: "", trimestres: garde ? String(P.trimestres) : "", points: garde ? String(P.points) : "", debut: "22", estime: false,
+    lignes: LIGNES.map((l) => ({valeur: "", versement: "", retraite: l[3]})), projet: garde ? S.objectif.nom : "", montant: garde && S.objectif.montant ? String(S.objectif.montant) : ""};
+}
+function estimerCarriere() {
+  const R = S.regles, annees = Math.max(0, Math.min(R.annee - num(A.naissance) - num(A.debut), 50)), sal = num(A.salaire);
+  const t1 = Math.min(sal, R.pass), t2 = Math.max(0, Math.min(sal, 8 * R.pass) - R.pass);
+  A.trimestres = String(Math.min(4 * annees, R.trimRequis));
+  A.points = String(Math.round(0.8 * annees * (R.t1 / 100 * t1 + R.t2 / 100 * t2) / R.prixAchat));
+  A.estime = true;
+}
+function controlerEtape() {
+  if (etape === 0) {
+    const n = num(A.naissance);
+    if (!(n >= 1930 && n <= S.regles.annee - 15 && Math.round(n) === n)) return "Indiquez votre année de naissance sur quatre chiffres, par exemple 1988.";
+    if (String(A.salaire).trim() === "") return "Indiquez votre rémunération brute annuelle, ou votre net mensuel pour une estimation. Sans salaire, saisissez 0.";
+  }
+  if (etape === 1 && (String(A.trimestres).trim() === "" || String(A.points).trim() === "")) return "Indiquez ces deux nombres, ou utilisez « Estimer à ma place ».";
+  return "";
+}
+function terminerAssistant() {
+  S.profil = {naissance: num(A.naissance), trimestres: num(A.trimestres), points: num(A.points), salaire: num(A.salaire), parts: S.exemple ? 1 : S.profil.parts, ageDepart: 0};
+  S.positions = A.lignes.map((l, i) => ({nom: LIGNES[i][0], env: LIGNES[i][1], classe: LIGNES[i][2], valeur: num(l.valeur), verse: num(l.valeur), retraite: l.retraite === true, versement: num(l.versement), indexe: false})).filter((x) => x.valeur > 0 || x.versement > 0);
+  S.objectif = {nom: String(A.projet || ""), montant: num(A.montant)};
+  S.exemple = false;
+  S = normaliser(S); sauver(); A = null; etape = -1; aller("synthese");
+}
+function saisirAssistant(el) {
+  if (!A) return;
+  const ch = el.dataset.a.split("."), der = ch.pop(), o = ch.reduce((x, k) => x[k], A);
+  o[der] = el.type === "checkbox" ? el.checked : el.value;
+  if (el.dataset.a === "net" && String(el.value).trim() !== "") { A.salaire = String(Math.round(num(el.value) * 12 / 0.77 / 100) * 100); const c = document.querySelector('[data-a="salaire"]'); if (c) c.value = A.salaire; }
+  if (el.dataset.a === "trimestres" || el.dataset.a === "points") A.estime = false;
+  const e = document.getElementById("a-err"); if (e) e.textContent = "";
+}
+const champ = (lab, cle, aide, extra) => `<label class="f">${lab}<input data-a="${cle}" value="${esc(lire(A, cle))}" ${extra || 'inputmode="decimal"'}>${aide ? `<span class="hint">${aide}</span>` : ""}</label>`;
+function vDebut() {
+  if (etape >= 0 && !A) etape = -1;
+  if (etape < 0) return `<section class="card hero wiz"><div class="lab">Bienvenue</div><h2 style="margin-top:8px">Où en est votre épargne, et que vous rapportera-t-elle à la retraite ?</h2>
+    <p>Horizon Épargne répond à ces deux questions en quelques minutes. Vos chiffres restent sur cet appareil : rien n'est envoyé ni partagé.</p>
+    <p class="sub">Pour aller vite, munissez-vous si possible de vos soldes de comptes, de votre dernier bulletin de paie et de votre relevé de carrière (info-retraite.fr). Vous pourrez compléter plus tard.</p>
+    ${!S.exemple && S.positions.length ? `<p class="sub">Attention : l'assistant remplace vos lignes de patrimoine actuelles par de grandes catégories.</p>` : ""}
+    <div class="acts"><button class="btn pri" data-act="commencer" type="button">Commencer avec mes chiffres</button><button class="btn" data-act="voir-exemple" type="button">${S.exemple ? "Voir d'abord un exemple" : "Revenir au tableau de bord"}</button></div></section>`;
+  const titres = ["Vous", "Votre carrière", "Votre épargne", "Un projet en cours ?"];
+  const tete = `<div class="steps">${titres.map((t, i) => `<i class="${i <= etape ? "on" : ""}"></i>`).join("")}</div><div class="lab">Étape ${etape + 1} sur ${titres.length}</div><h2 style="margin-top:6px">${titres[etape]}</h2>`;
+  let corps = "";
+  if (etape === 0) corps = `<div class="col">${champ("Année de naissance", "naissance", "Elle sert à calculer votre âge de départ à la retraite.", 'inputmode="numeric" maxlength="4"')}
+    ${champ("Rémunération brute par an (€)", "salaire", "Le total avant cotisations et impôt, primes comprises. Il figure sur votre bulletin de paie de décembre, à la ligne du cumul brut annuel.")}
+    ${champ("Ou votre salaire net par mois, avant impôt (€)", "net", "L'outil en déduit une estimation du brut annuel : net × 12 ÷ 0,77.")}</div>`;
+  if (etape === 1) corps = `<p class="sub">Ces deux nombres figurent sur votre relevé de carrière, à télécharger gratuitement sur info-retraite.fr.</p><div class="col">
+    ${champ("Trimestres validés", "trimestres", "Le total de vos trimestres, tous régimes confondus.")}
+    ${champ("Points Agirc-Arrco", "points", "La retraite complémentaire des salariés du secteur privé. Saisissez 0 si vous n'en avez pas.")}</div>
+    ${A.estime ? `<p class="note">Estimation appliquée : ${esc(A.trimestres)} trimestres et ${esc(A.points)} points. Remplacez-les dès que possible par ceux de votre relevé, l'écart peut être important.</p>` : ""}
+    <div class="pos" style="margin-top:14px"><b>Vous ne les avez pas sous la main ?</b><div class="fields" style="margin-top:8px">${champ("Âge de votre premier emploi", "debut", "", 'inputmode="numeric" maxlength="2"')}</div><div class="acts" style="margin-top:10px"><button class="btn" data-act="estimer" type="button">Estimer à ma place</button></div></div>`;
+  if (etape === 2) corps = `<p class="sub">Un montant par catégorie, même approximatif. Laissez vide ce que vous n'avez pas.</p>${LIGNES.map((l, i) => `<div class="ligne"><b>${l[0]}</b><span class="hint">${l[4]}</span><div class="fields" style="margin-top:8px">
+    ${champ("Montant aujourd'hui (€)", "lignes." + i + ".valeur")}${champ("Versement par an (€)", "lignes." + i + ".versement")}
+    <label class="f chk"><input type="checkbox" data-a="lignes.${i}.retraite"${A.lignes[i].retraite ? " checked" : ""}>Je le garde pour la retraite</label></div></div>`).join("")}
+    <p class="note">Cochez « je le garde pour la retraite » pour l'épargne que vous ne comptez pas utiliser avant : c'est elle que l'outil projette.</p>`;
+  if (etape === 3) {
+    const tot = somme(A.lignes, (l) => num(l.valeur)), ret = somme(A.lignes.filter((l) => l.retraite), (l) => num(l.valeur));
+    corps = `<p class="sub">Facultatif. Si vous épargnez pour un projet précis (apport immobilier, travaux, voyage), l'outil suit son avancement sur votre épargne disponible.</p>
+      <div class="col"><label class="f">Nom du projet<input data-a="projet" value="${esc(A.projet)}" maxlength="60"></label>${champ("Montant visé (€)", "montant")}</div>
+      <div class="pos" style="margin-top:16px"><b>Récapitulatif</b><div class="chips" style="margin-top:8px"><span class="chip">Épargne saisie <b>${eur(tot)}</b></span><span class="chip">Gardée pour la retraite <b>${eur(ret)}</b></span><span class="chip">Année de naissance <b>${esc(A.naissance)}</b></span><span class="chip">Brut annuel <b>${eur(num(A.salaire))}</b></span></div></div>`;
+  }
+  return `<section class="card wiz">${tete}${corps}<div class="err" id="a-err" role="alert"></div><div class="acts">${etape > 0 ? `<button class="btn" data-act="retour" type="button">Retour</button>` : ""}<button class="btn pri" data-act="${etape === 3 ? "terminer" : "suivant"}" type="button">${etape === 3 ? "Voir mon tableau de bord" : "Continuer"}</button></div><button class="lien" data-act="quitter" type="button">Quitter l'assistant</button></section>`;
+}
+const VUES = {synthese: vSynthese, patrimoine: vPatrimoine, retraite: vRetraite, projections: vProjections, reglages: vReglages, notice: vNotice, debut: vDebut};
+function rendre() {
+  document.getElementById("vue").innerHTML = VUES[vue]();
+  document.getElementById("nav").classList.toggle("hide", vue === "debut");
+  document.querySelectorAll("#nav button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.go === vue)));
+  if (vue === "retraite") majRetraite();
+  if (vue === "reglages") document.getElementById("t-json").value = JSON.stringify(S);
+}
+function aller(v) { if (!VUES[v]) return; vue = v; try { history.replaceState(null, "", "#" + v); } catch (e) { location.hash = v; } rendre(); window.scrollTo(0, 0); }
+
+/* ---------- Événements ---------- */
+const message = (m) => { const e = document.getElementById("t-msg"); if (e) e.textContent = m; };
+const arme = (t, libelle) => { if (t.dataset.arme === "1") return true; t.dataset.arme = "1"; t.textContent = libelle; return false; };
+function appliquerTheme(th) {
+  document.documentElement.dataset.theme = th;
+  const b = document.getElementById("b-theme"), m = document.querySelector('meta[name="theme-color"]');
+  if (b) b.textContent = th === "light" ? "Sombre" : "Clair";
+  if (m) m.setAttribute("content", th === "light" ? "#F4F6F9" : "#0B0F14");
+}
+async function telecharger() {
+  const nom = "horizon-epargne-sauvegarde.json", texte = JSON.stringify(S, null, 1), secours = "ouvrez « Autres options » et copiez le texte.";
+  /* Page ouverte dans Claude : l'enregistrement passe par la fonction prévue par la plateforme, avec confirmation. */
+  if (window.claude && typeof window.claude.use === "function") {
+    message("Préparation de la sauvegarde…");
+    try {
+      const enregistreur = await window.claude.use("downloads");
+      if (enregistreur) {
+        try { await enregistreur.save({filename: nom, data: texte}); return message("Sauvegarde enregistrée."); }
+        catch (e) { return message(e && e.code === "declined" ? "Enregistrement annulé." : "Enregistrement impossible ici : " + secours); }
+      }
+    } catch (e) {}
+  }
+  /* Page ouverte comme un site ordinaire : téléchargement classique du navigateur. */
+  try {
+    const url = URL.createObjectURL(new Blob([texte], {type: "application/json"})), a = document.createElement("a");
+    a.href = url; a.download = nom;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    message("Sauvegarde préparée. Si aucun fichier n'apparaît dans vos téléchargements, " + secours);
+  } catch (e) { message("Téléchargement impossible ici : " + secours); }
+}
+function restaurer(texte, source) {
+  try {
+    const o = JSON.parse(texte);
+    if (!o || typeof o !== "object" || !Array.isArray(o.positions) || !o.profil) throw 0;
+    S = normaliser(o); sauver(); rendre(); message("Données restaurées depuis " + source + ".");
+  } catch (e) { message("Contenu illisible : rien n'a été modifié."); }
+}
+document.addEventListener("click", (ev) => {
+  const t = ev.target.closest("[data-go],[data-act],[data-suppr],[data-sc]");
+  if (!t) return;
+  if (t.dataset.go) { if (t.dataset.go === "debut") { etape = -1; A = null; } return aller(t.dataset.go); }
+  if (t.dataset.sc) { scSel = t.dataset.sc; return majRetraite(); }
+  if (t.dataset.suppr != null) { S.positions.splice(+t.dataset.suppr, 1); S.exemple = false; sauver(); return rendre(); }
+  const act = t.dataset.act, erreur = (m) => { const e = document.getElementById("a-err"); if (e) e.textContent = m; };
+  if (act === "ajout") { S.positions.push({nom: "Nouveau placement", env: "Autre", classe: "Autre", valeur: 0, verse: 0, retraite: false, versement: 0, indexe: false}); S.exemple = false; sauver(); return rendre(); }
+  if (act === "theme") { const th = document.documentElement.dataset.theme === "light" ? "dark" : "light"; appliquerTheme(th); try { localStorage.setItem(CLE + "-theme", th); } catch (e) {} return; }
+  if (act === "commencer") { A = nouveauBrouillon(); etape = 0; return aller("debut"); }
+  if (act === "voir-exemple" || act === "quitter") { A = null; etape = -1; sauver(); return aller("synthese"); }
+  if (act === "retour") { etape = Math.max(0, etape - 1); rendre(); return window.scrollTo(0, 0); }
+  if (act === "suivant") { const e = controlerEtape(); if (e) return erreur(e); etape++; rendre(); return window.scrollTo(0, 0); }
+  if (act === "estimer") { const n = num(A.debut); if (!(n >= 14 && n <= 60)) return erreur("Indiquez l'âge de votre premier emploi, entre 14 et 60 ans."); estimerCarriere(); return rendre(); }
+  if (act === "terminer") return terminerAssistant();
+  if (act === "dl") return telecharger();
+  if (act === "copie") { const ta = document.getElementById("t-json"); ta.select(); try { navigator.clipboard.writeText(ta.value).then(() => message("Texte copié."), () => message("Texte sélectionné : copiez-le à la main.")); } catch (e) { message("Texte sélectionné : copiez-le à la main."); } return; }
+  if (act === "restaure") return restaurer(document.getElementById("t-json").value, "le texte");
+  if (act === "exemple") { if (!S.exemple && !arme(t, "Confirmer : remplacer mes données par l'exemple")) return; S = EXEMPLE(); sauver(); return rendre(); }
+  if (act === "vide") { if (!arme(t, "Confirmer : tout effacer")) return; const r = S.regles; S = EXEMPLE(); S.exemple = false; S.positions = []; S.profil = {naissance: 1990, trimestres: 0, points: 0, salaire: 0, parts: 1, ageDepart: 0}; S.regles = r; sauver(); return rendre(); }
+});
+document.addEventListener("change", (ev) => {
+  const el = ev.target;
+  if (el.id === "f-import") {
+    const f = el.files && el.files[0];
+    if (!f) return;
+    if (f.size > 1e6) return message("Fichier trop volumineux : rien n'a été modifié.");
+    const lecteur = new FileReader();
+    lecteur.onload = () => restaurer(String(lecteur.result), "le fichier");
+    lecteur.onerror = () => message("Lecture du fichier impossible : rien n'a été modifié.");
+    lecteur.readAsText(f);
+    return;
+  }
+  if (el.dataset && el.dataset.a) return saisirAssistant(el);
+  const k = el.dataset && el.dataset.k;
+  if (!k) return;
+  const ch = k.split("."), der = ch.pop(), o = ch.reduce((x, c) => x[c], S), ancien = o[der];
+  const nouvelle = el.type === "checkbox" ? el.checked : el.hasAttribute("data-n") ? num(el.value) : el.value;
+  o[der] = nouvelle;
+  if (k === "profil.naissance") S.profil.ageDepart = 0;
+  S.exemple = false;
+  let N = normaliser(S);
+  if (el.type !== "checkbox" && String(lire(N, k)) !== String(nouvelle).trim()) { o[der] = ancien; N = normaliser(S); }
+  S = N; sauver();
+  if (el.type !== "checkbox") el.value = fr(lire(S, k));
+});
+document.addEventListener("input", (ev) => { const el = ev.target; if (el.id === "r-age") majRetraite(); else if (el.dataset && el.dataset.a && el.type !== "checkbox") saisirAssistant(el); });
+const lireCourbe = (ev) => {
+  const svg = ev.target.closest && ev.target.closest("#g-traj");
+  if (!svg) return;
+  const b = svg.getBoundingClientRect(), d = svg.dataset, W = +d.w, px = (ev.clientX - b.left) / b.width * W;
+  const x0 = +d.x0, x1 = +d.x1, age = Math.round(Math.min(x1, Math.max(x0, x0 + (x1 - x0) * (px - +d.ml) / (W - +d.ml - +d.mr))));
+  const gx = +d.ml + (W - +d.ml - +d.mr) * (x1 === x0 ? 0 : (age - x0) / (x1 - x0)), g = document.getElementById("g-traj-g");
+  g.setAttribute("x1", gx); g.setAttribute("x2", gx);
+  const dep = ageRetenu();
+  document.getElementById("g-traj-r").textContent = age + " ans : " + SCN.map(([k, n]) => { const p = projeter(S, k, dep).traj.find((q) => q.age === age); return n + " " + (p ? court(p.total) : "—"); }).join(" · ");
+};
+document.addEventListener("pointermove", lireCourbe);
+document.addEventListener("pointerdown", lireCourbe);
+document.addEventListener("keydown", (ev) => { if ((ev.key === "Enter" || ev.key === " ") && ev.target.dataset && ev.target.dataset.sc) { ev.preventDefault(); scSel = ev.target.dataset.sc; majRetraite(); } });
+let minuterie = 0, largeurVue = 0;
+window.addEventListener("resize", () => { clearTimeout(minuterie); minuterie = setTimeout(() => { const l = document.getElementById("vue").clientWidth; if (l !== largeurVue) { largeurVue = l; if (vue === "projections") rendre(); } }, 200); });
+window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (VUES[v] && v !== vue) { vue = v; rendre(); } });
+try { if (localStorage.getItem(CLE + "-theme") === "light") appliquerTheme("light"); } catch (e) {}
+if (VUES[location.hash.slice(1)]) vue = location.hash.slice(1);
+else if (premiereVisite) vue = "debut";
+rendre();
+</script>
+</body>
+</html>
